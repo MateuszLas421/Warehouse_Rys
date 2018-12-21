@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Warehouse_Rys
 {
-    public class DateSqlite : INotifyPropertyChanged
+    public class DateSqlite : INotifyPropertyChanged 
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string property)

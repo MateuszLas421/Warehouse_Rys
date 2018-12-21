@@ -17,7 +17,7 @@ namespace Warehouse_Rys.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
         }
-        private string _login, _password;
+        private string _login;
         private Boolean ok;
 
         public Login()
@@ -25,18 +25,12 @@ namespace Warehouse_Rys.Model
             Ok = false;
         }
 
-        public string Login1 { get => _login;
+        public string Login1
+        {
+            get => _login;
             set
             {
                 if (_login != value) {_login = value; OnPropertyChanged("Login1");}
-            }
-        }
-        public string Password
-        {
-            get => _password;
-            set
-            {
-                if (_password != value) { _password = value; OnPropertyChanged("Password"); }
             }
         }
         public Boolean Ok
