@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Security;
 
 namespace Warehouse_Rys.Model
 {
@@ -18,7 +19,8 @@ namespace Warehouse_Rys.Model
             }
         }
         private string _login;
-        private Boolean ok;
+        private String _password;
+        private bool ok;
 
         public Login()
         {
@@ -33,7 +35,15 @@ namespace Warehouse_Rys.Model
                 if (_login != value) {_login = value; OnPropertyChanged("Login1");}
             }
         }
-        public Boolean Ok
+        public String Password_log
+        {
+            get => _password;
+            set
+            {
+                if (_password != value) { _password = value; OnPropertyChanged("Password_log"); }
+            }
+        }
+        public bool Ok
         {
             get => ok;
             set

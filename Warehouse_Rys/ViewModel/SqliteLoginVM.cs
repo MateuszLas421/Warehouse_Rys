@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.CommandWpf;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SQLite;
@@ -6,11 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Interactivity;
 
 namespace Warehouse_Rys.ViewModel
 {
     class SqliteLoginVM : INotifyPropertyChanged
     {
+        public string Password { get; set; }
+        public System.Security.SecureString SecurePassword { get; }
+        
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string property)
         {
@@ -21,7 +29,7 @@ namespace Warehouse_Rys.ViewModel
         }
         private Model.Login _login_user;
 
-
+        public ICommand LoginCheck { get; set; }
 
         public Model.Login Login_user
         {
@@ -34,20 +42,40 @@ namespace Warehouse_Rys.ViewModel
         }
         public SqliteLoginVM()
         {
+            MessageBox.Show("create");
+            System.Windows.Controls.PasswordBox passwordBox = new System.Windows.Controls.PasswordBox();
             Login_user = new Model.Login();
             Login_user.Login1 = String.Empty;
+            Login_user.Password_log = passwordBox.Password;
+            Login_user.Ok = false;
+            LoginCheck = new RelayCommand(Login_Check);
+            MessageBox.Show("wiazanie");
         }
+        private void Login_Check()
+        {
+            MessageBox.Show("Interfejs Icommand click");
+            LoadData();
+        }
+
         public void LoadData()
         {
             try
             {
-                using (var conn = new SQLiteConnection(@"Data Source=Base.db;Version=3"))
+                MessageBox.Show("try");
+                using (var conn = new SQLiteConnection(@"Data Source=Base.s3db;Version=3"))
                 {
-                    conn.Open();
+                    try
+                    {
+                        conn.Open();
+                    }
+                    catch(Exception ex)
+            {
+                        MessageBox.Show(ex.Message);
+                    }
                     using (var cmd = new SQLiteCommand("SELECT NickName,Password FROM Users WHERE NickName='@username' AND Password = '@password'", conn))
                     {
                         cmd.Parameters.AddWithValue("@username", Login_user.Login1);
-                        cmd.Parameters.AddWithValue("@password", Pas);
+                        cmd.Parameters.AddWithValue("@password", Login_user.Password_log);
                         using (var reader = cmd.ExecuteReader())
                         {
                             var count = 0;
@@ -57,14 +85,13 @@ namespace Warehouse_Rys.ViewModel
                             }
                             if (count == 1)
                             {
-                                Base bs = new Base();
-                                bs.Show();
-                                Hide();
+                                Login_user.Ok = true;
                             }
                             else if (count == 0)
                             {
-                                flatAlertBox1.kind = FlatUI.FlatAlertBox._Kind.Error;
-                                flatAlertBox1.Text = "data not right";
+                                Login_user.Login1 = null;
+                                Login_user.Password_log = null;
+
                             }
                         }
                     }

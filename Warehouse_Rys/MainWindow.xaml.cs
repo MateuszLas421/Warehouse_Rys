@@ -23,6 +23,7 @@ namespace Warehouse_Rys
         public MainWindow()
         {
             InitializeComponent();
+            
         }
     }
 }
