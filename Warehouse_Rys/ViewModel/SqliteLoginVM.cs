@@ -48,8 +48,14 @@ namespace Warehouse_Rys.ViewModel
             Login_user.Login1 = String.Empty;
             Login_user.Password_log = passwordBox.Password;
             Login_user.Ok = false;
-            LoginCheck = new RelayCommand(Login_Check);
-            MessageBox.Show("wiazanie");
+            try
+            {
+                LoginCheck = new RelayCommand(Login_Check);
+            }
+            catch
+            {
+                MessageBox.Show("error wiązania");
+            }
         }
         private void Login_Check()
         {
