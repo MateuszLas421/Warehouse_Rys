@@ -1,7 +1,7 @@
 <Application x:Class="Warehouse_Rys.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Warehouse_Rys" StartupUri="MainWindow.xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
   <Application.Resources>
     <ResourceDictionary>
-            <vm:SqliteLoginVM x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:Warehouse_Rys.ViewModel" />
+            
     </ResourceDictionary>
   </Application.Resources>
 </Application>

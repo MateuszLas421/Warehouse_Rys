@@ -6,18 +6,10 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Security;
 
-namespace Warehouse_Rys.Model
+namespace Warehouse_Rys
 {
-    public class Login : INotifyPropertyChanged
+    public class Login 
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
         private string _login;
         private String _password;
         private bool ok;
@@ -32,7 +24,7 @@ namespace Warehouse_Rys.Model
             get => _login;
             set
             {
-                if (_login != value) {_login = value; OnPropertyChanged("Login1");}
+                if (_login != value) {_login = value; }
             }
         }
         public String Password_log
@@ -40,7 +32,7 @@ namespace Warehouse_Rys.Model
             get => _password;
             set
             {
-                if (_password != value) { _password = value; OnPropertyChanged("Password_log"); }
+                if (_password != value) { _password = value; }
             }
         }
         public bool Ok
@@ -48,7 +40,7 @@ namespace Warehouse_Rys.Model
             get => ok;
             set
             {
-                if (ok != value) { ok = value; OnPropertyChanged("Ok"); }
+                if (ok != value) { ok = value;  }
             }
         }
     }
