@@ -23,5 +23,16 @@ namespace Warehouse_Rys
         {
             InitializeComponent();
         }
+
+
+        private void Exit_Click(object sender, RoutedEventArgs e) // zamykanie z menu
+        {
+            this.Close();
+        }
+
+        private void Exit_Click(object sender, EventArgs e)  //zamykanie okna 
+        {
+
+        }
     }
 }
