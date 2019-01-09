@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse_Rys"
         mc:Ignorable="d"
-        Title="Login" Height="250" Width="300"        >
+        Title="Login" Height="150" Width="300"        >
     <Grid>
         <StackPanel>
             <Grid>
@@ -20,12 +20,12 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Login:" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Login_user.Login1}" Grid.Row="0" Grid.Column="1" Width = "120" Margin = "5"/>
+                <TextBox x:Name="loginBox" Text="" Grid.Row="0" Grid.Column="1" Width = "120" Margin = "5"/>
                 <Label Content="Password:" Grid.Row="1" Grid.Column="0"/>
                 <TextBox x:Name="passwordBox" Grid.Row="1" Grid.Column="1" Width = "120" Margin = "5"/>
                 <Button Content="Login Check" Height="20" Width="100" VerticalAlignment="Bottom" 
                 HorizontalAlignment="Right" Margin="20" Grid.Row="2" Grid.Column="1" Click="Button_Click"/>
-                <TextBox Text="{Binding Login.Ok}" Grid.Row="2" Grid.Column="0" Margin = "5" IsReadOnly="True" />
+
             </Grid>
         </StackPanel>
     </Grid>

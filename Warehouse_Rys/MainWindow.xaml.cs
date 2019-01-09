@@ -42,6 +42,8 @@ namespace Warehouse_Rys
 
         public void LoadData()
         {
+            Login_user.Password_log = passwordBox.Text;
+            Login_user.Login1 = loginBox.Text;
             try
             {
                 //MessageBox.Show("try");
@@ -57,43 +59,38 @@ namespace Warehouse_Rys
                         MessageBox.Show(ex.Message);
                         MessageBox.Show("problem z połączeniem?");
                     }
-                    using (var cmd = new SQLiteCommand("SELECT NickName,Password,Permissions FROM Users WHERE NickName = '@username' AND Password = '@password'", conn))
+                    using (var cmd = new SQLiteCommand("SELECT NickName,Permissions FROM Users WHERE NickName = '" + Login_user.Login1 + "' AND Password = '" + Login_user.Password_log + "'   ", conn))
                     {
                         try
                         {
-                            cmd.Parameters.AddWithValue("@username", Login_user.Login1);
-                            cmd.Parameters.AddWithValue("@password", Login_user.Password_log);
-                            // MessageBox.Show(Login_user.Login1);
-                            // MessageBox.Show(Login_user.Password_log);
+                           // cmd.Parameters.AddWithValue("@username", Login_user.Login1);
+                           // cmd.Parameters.AddWithValue("@password", Login_user.Password_log);
+                           // MessageBox.Show(Login_user.Login1);
+                           // MessageBox.Show(Login_user.Password_log);
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("niepowodzenie połączenia");
                             MessageBox.Show(ex.Message);
                         }
-                        using (var reader = cmd.ExecuteReader())     /// coś tu nie działa bo nie idzie się zalogować   do naprawienia
+                        using (var reader = cmd.ExecuteReader()) 
                         {
-
-                            /* var count = 0;
-                             while (reader.Read())
-                             {
-                                 count += 1;
-                             }*/
                             if (reader.HasRows)
                             {
 
                                 Login_user.Ok = true;
+                                var ProgramWindow = new ProgramWindowin();
+                                this.Close();
+                                ProgramWindow.Show();
                             }
                             else
                             {
                                 Login_user.Login1 = null;
                                 Login_user.Password_log = null;
+                                passwordBox.Clear();
+                                loginBox.Clear();
+                                MessageBox.Show("Nie poprawne hasło lub login");
                             }
-                            MessageBox.Show(Login_user.Ok.ToString());
-                            var ProgramWindow = new ProgramWindowin();
-                            this.Close();
-                            ProgramWindow.Show();
-
                         }
                     }
                 }
@@ -101,7 +98,6 @@ namespace Warehouse_Rys
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                MessageBox.Show("plik problem?");
             }
         }
 
