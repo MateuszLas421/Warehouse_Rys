@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Warehouse_Rys
 {
     /// <summary>
@@ -20,9 +22,88 @@ namespace Warehouse_Rys
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Login _login_user;
+        public Login Login_user
+        {
+            get { return _login_user; }
+            set
+            {
+                _login_user = value;
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
+            Login_user = new Login();
+            Login_user.Login1 = String.Empty;
+            Login_user.Password_log = String.Empty;
+            Login_user.Ok = false;
+        }
+
+        public void LoadData()
+        {
+            Login_user.Password_log = passwordBox.Text;
+            Login_user.Login1 = loginBox.Text;
+            try
+            {
+                //MessageBox.Show("try");
+                using (var conn = new SQLiteConnection(@"Data Source=Base.s3db;Version=3;New=False"))
+                {
+                    try
+                    {
+                        //MessageBox.Show("próba otwarcia ?");
+                        conn.Open();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        MessageBox.Show("problem z połączeniem?");
+                    }
+                    using (var cmd = new SQLiteCommand("SELECT NickName,Permissions FROM Users WHERE NickName = '" + Login_user.Login1 + "' AND Password = '" + Login_user.Password_log + "'   ", conn))
+                    {
+                        try
+                        {
+                           // cmd.Parameters.AddWithValue("@username", Login_user.Login1);
+                           // cmd.Parameters.AddWithValue("@password", Login_user.Password_log);
+                           // MessageBox.Show(Login_user.Login1);
+                           // MessageBox.Show(Login_user.Password_log);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("niepowodzenie połączenia");
+                            MessageBox.Show(ex.Message);
+                        }
+                        using (var reader = cmd.ExecuteReader()) 
+                        {
+                            if (reader.HasRows)
+                            {
+
+                                Login_user.Ok = true;
+                                var ProgramWindow = new ProgramWindowin();
+                                this.Close();
+                                ProgramWindow.Show();
+                            }
+                            else
+                            {
+                                Login_user.Login1 = null;
+                                Login_user.Password_log = null;
+                                passwordBox.Clear();
+                                loginBox.Clear();
+                                MessageBox.Show("Nie poprawne hasło lub login");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoadData();
         }
     }
 }
