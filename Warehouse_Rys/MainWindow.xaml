@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse_Rys"
         mc:Ignorable="d"
-        Title="Ryś" Height="1600" Width="900">
+        Title="MainWindow" Height="150" Width="200">
     <Grid>
-        
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Login:" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Login_user.Login1}" Grid.Row="0" Grid.Column="1" Width = "120" Margin = "5"/>
+                <Label Content="Password:" Grid.Row="1" Grid.Column="0"/>
+                <PasswordBox x:Name="passwordBox" Grid.Row="1" Grid.Column="1" Width = "120" Margin = "5"/>
+                <Button Content="Sprawdź" Height="20" Width="100" VerticalAlignment="Bottom" 
+                HorizontalAlignment="Right" Margin="20" Command="{Binding Sprawdz}" 
+                        Grid.Row="2" Grid.Column="1"/>
+                <TextBox Text="{Binding Login.Ok}" Grid.Row="2" Grid.Column="0" Margin = "5" IsReadOnly="True" />
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>
