@@ -34,5 +34,23 @@ namespace Warehouse_Rys
         {
 
         }
+
+        private void MenuItem_Start(object sender, RoutedEventArgs e)
+        {
+            windowStartStackPanel.Visibility = Visibility.Visible;
+            DataStany.Visibility = Visibility.Hidden;
+        }
+
+        private void MenuItem_ListaStany(object sender, RoutedEventArgs e)
+        {
+            windowStartStackPanel.Visibility = Visibility.Hidden;
+            DataStany.Visibility = Visibility.Visible;
+        }
+
+        private void MenuItem_Zamowienie(object sender, RoutedEventArgs e)
+        {
+            windowStartStackPanel.Visibility = Visibility.Hidden;
+            DataStany.Visibility = Visibility.Hidden;
+        }
     }
 }

@@ -9,17 +9,29 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Menu Grid.Row="0" Grid.Column="0" Margin="1,0,0,0">
+        <Menu Grid.Row="0" Grid.Column="0" Margin="2">
             <MenuItem Header="Plik">
                 <MenuItem Header="Zamknij" Click="Exit_Click"/>
             </MenuItem>
         </Menu>
-
+        <Menu Grid.Row="1" Grid.Column="0" Margin="5">
+            <MenuItem Header="Start" Click="MenuItem_Start"/>
+            <MenuItem Header="Stany" Click="MenuItem_ListaStany"/>
+            <MenuItem Header="Zamówienie" Click="MenuItem_Zamowienie"/>
+            <MenuItem Header=""/>
+        </Menu>
+        <StackPanel x:Name="windowStartStackPanel" Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="1" Margin="5">
+            <TextBlock Text="sdasdsa      Start Window     ddddddddd"/>
+        </StackPanel>
+        <DataGrid x:Name="DataStany" Visibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Margin="5">
+            
+        </DataGrid>
     </Grid>
 </Window>
