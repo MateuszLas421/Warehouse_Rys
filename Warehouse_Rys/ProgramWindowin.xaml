@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse_Rys"
         mc:Ignorable="d"
-        Title="ProgramWindowin" Height="450" Width="800" Closed="Exit_Click">
+        Title="Werehouse_Rys" Height="450" Width="800" Closed="Exit_Click">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -30,8 +30,14 @@
         <StackPanel x:Name="windowStartStackPanel" Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="1" Margin="5">
             <TextBlock Text="sdasdsa      Start Window     ddddddddd"/>
         </StackPanel>
-        <DataGrid x:Name="DataStany" Visibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Margin="5">
-            
+        <DataGrid x:Name="DataStany" Visibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Margin="5"
+                  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue" GridLinesVisibility="None">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Symbol}" />
+                <DataGridTextColumn Header="EAN" Binding="{Binding Nazwa}"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding LiczbaSztuk}" >
+                </DataGridTextColumn>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>

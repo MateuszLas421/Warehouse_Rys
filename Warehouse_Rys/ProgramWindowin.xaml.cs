@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +20,17 @@ namespace Warehouse_Rys
     /// </summary>
     public partial class ProgramWindowin : Window
     {
+        private ObservableCollection<Produkt> QuantityProducts = null;
         public ProgramWindowin()
         {
             InitializeComponent();
+            OpenWindow_Program();
         }
 
+        private void OpenWindow_Program()
+        {
+            QuantityProducts = new ObservableCollection<Produkt>();
+        }
 
         private void Exit_Click(object sender, RoutedEventArgs e) // zamykanie z menu
         {

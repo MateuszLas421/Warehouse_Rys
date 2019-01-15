@@ -46,33 +46,18 @@ namespace Warehouse_Rys
             Login_user.Login1 = loginBox.Text;
             try
             {
-                //MessageBox.Show("try");
                 using (var conn = new SQLiteConnection(@"Data Source=Base.s3db;Version=3;New=False"))
                 {
                     try
                     {
-                        //MessageBox.Show("próba otwarcia ?");
                         conn.Open();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
-                        MessageBox.Show("problem z połączeniem?");
+                        MessageBox.Show(ex.Message + "problem z połączeniem?");
                     }
                     using (var cmd = new SQLiteCommand("SELECT NickName,Permissions FROM Users WHERE NickName = '" + Login_user.Login1 + "' AND Password = '" + Login_user.Password_log + "'   ", conn))
                     {
-                        try
-                        {
-                           // cmd.Parameters.AddWithValue("@username", Login_user.Login1);
-                           // cmd.Parameters.AddWithValue("@password", Login_user.Password_log);
-                           // MessageBox.Show(Login_user.Login1);
-                           // MessageBox.Show(Login_user.Password_log);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("niepowodzenie połączenia");
-                            MessageBox.Show(ex.Message);
-                        }
                         using (var reader = cmd.ExecuteReader()) 
                         {
                             if (reader.HasRows)
@@ -100,7 +85,6 @@ namespace Warehouse_Rys
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             LoadData();
