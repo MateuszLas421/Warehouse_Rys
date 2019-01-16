@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,11 @@ namespace Warehouse_Rys
     /// </summary>
     public partial class ProgramWindowin : Window
     {
-        private ObservableCollection<Produkt> QuantityProducts = null;
+        private ObservableCollection<Quantity> QuantityProducts = null;
+        private bool BDQOPEN = false;
+
+        public bool BDQOPEN1 { get => BDQOPEN; set => BDQOPEN = value; }
+
         public ProgramWindowin()
         {
             InitializeComponent();
@@ -29,7 +34,8 @@ namespace Warehouse_Rys
 
         private void OpenWindow_Program()
         {
-            QuantityProducts = new ObservableCollection<Produkt>();
+            QuantityProducts = new ObservableCollection<Quantity>();
+            DataStany.ItemsSource = QuantityProducts;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e) // zamykanie z menu
@@ -46,18 +52,53 @@ namespace Warehouse_Rys
         {
             windowStartStackPanel.Visibility = Visibility.Visible;
             DataStany.Visibility = Visibility.Hidden;
+            DataOrder.Visibility = Visibility.Hidden;
         }
 
         private void MenuItem_ListaStany(object sender, RoutedEventArgs e)
         {
             windowStartStackPanel.Visibility = Visibility.Hidden;
             DataStany.Visibility = Visibility.Visible;
+            DataOrder.Visibility = Visibility.Hidden;
+            if (BDQOPEN == false) { BaseOpen(); BDQOPEN = true; }
         }
 
         private void MenuItem_Zamowienie(object sender, RoutedEventArgs e)
         {
             windowStartStackPanel.Visibility = Visibility.Hidden;
             DataStany.Visibility = Visibility.Hidden;
+            DataOrder.Visibility = Visibility.Visible;
+        }
+
+
+        private void BaseOpen()
+        {
+            using (var conn = new SQLiteConnection(@"Data Source=Base.s3db;Version=3;New=False"))
+            {
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "problem z połączeniem?");
+                }
+                string strsql = "Select Products.ID, Name, EAN, Quantity_Product from Products join QUANTITY on Products.Quantity_ID=QUANTITY.ID";
+                using (SQLiteCommand cmd = new SQLiteCommand(strsql, conn))
+                {
+                    using (var rdr = cmd.ExecuteReader())
+                    {
+                        while (rdr.Read())
+                        {
+                            Quantity a = new Quantity(rdr.GetInt32(0),rdr.GetString(1), rdr.GetString(2), rdr.GetInt32(3));
+                            QuantityProducts.Add(a);
+                            // MessageBox.Show(a.Name.ToString()+" "+a.EAN.ToString()+" "+a.QuantityProdukt.ToString());
+                        }
+                        //DataStany.ItemsSource = QuantityProducts;
+                    }
+                }
+                conn.Close();
+            }
         }
     }
 }

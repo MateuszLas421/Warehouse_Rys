@@ -11,6 +11,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -27,15 +28,30 @@
             <MenuItem Header="Zamówienie" Click="MenuItem_Zamowienie"/>
             <MenuItem Header=""/>
         </Menu>
+        
         <StackPanel x:Name="windowStartStackPanel" Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="1" Margin="5">
             <TextBlock Text="sdasdsa      Start Window     ddddddddd"/>
         </StackPanel>
         <DataGrid x:Name="DataStany" Visibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Margin="5"
                   AutoGenerateColumns="False" AlternatingRowBackground="LightBlue" GridLinesVisibility="None">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Symbol}" />
-                <DataGridTextColumn Header="EAN" Binding="{Binding Nazwa}"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding LiczbaSztuk}" >
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="EAN" Binding="{Binding EAN}"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding QuantityProdukt}" >
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        
+
+        <DataGrid x:Name="DataOrder" Visibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Margin="5"
+                  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue" GridLinesVisibility="None">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="EAN" Binding="{Binding EAN}"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding QuantityProdukt}" >
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
