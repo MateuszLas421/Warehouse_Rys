@@ -28,25 +28,38 @@
             <MenuItem Header="Zamówienie" Click="MenuItem_Zamowienie"/>
             <MenuItem Header=""/>
         </Menu>
-        
+
         <StackPanel x:Name="windowStartStackPanel" Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="1" Margin="5">
             <TextBlock Text="sdasdsa      Start Window     ddddddddd"/>
         </StackPanel>
+        
         <DataGrid x:Name="DataStany" Visibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Margin="5"
-                  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue" GridLinesVisibility="None">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="EAN" Binding="{Binding EAN}"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding QuantityProdukt}" >
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        
-        
+                  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue" GridLinesVisibility="None" IsReadOnly="True" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="EAN" Binding="{Binding EAN}"/>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding QuantityProdukt}" >
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        <Grid Grid.Row="3" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="searchbox" Grid.Row="0" Grid.Column="0" Margin="5" Visibility="Hidden"/>
+            <Button x:Name="btnsearch" Grid.Row="0" Grid.Column="1" Content="Search" Visibility="Hidden" Margin="5"/>
+            <Button x:Name="btnAdd" Grid.Row="0" Grid.Column="3" Content="ADD" Click="clicBtnAdd" Visibility="Hidden" Margin="5"/>
+        </Grid>
 
         <DataGrid x:Name="DataOrder" Visibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Margin="5"
-                  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue" GridLinesVisibility="None">
+                  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue" GridLinesVisibility="None" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />

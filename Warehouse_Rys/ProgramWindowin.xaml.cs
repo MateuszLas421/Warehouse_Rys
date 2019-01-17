@@ -53,6 +53,9 @@ namespace Warehouse_Rys
             windowStartStackPanel.Visibility = Visibility.Visible;
             DataStany.Visibility = Visibility.Hidden;
             DataOrder.Visibility = Visibility.Hidden;
+            btnAdd.Visibility = Visibility.Hidden;
+            btnsearch.Visibility = Visibility.Hidden;
+            searchbox.Visibility = Visibility.Hidden;
         }
 
         private void MenuItem_ListaStany(object sender, RoutedEventArgs e)
@@ -60,6 +63,9 @@ namespace Warehouse_Rys
             windowStartStackPanel.Visibility = Visibility.Hidden;
             DataStany.Visibility = Visibility.Visible;
             DataOrder.Visibility = Visibility.Hidden;
+            btnAdd.Visibility = Visibility.Hidden;
+            btnsearch.Visibility = Visibility.Visible;
+            searchbox.Visibility = Visibility.Visible;
             if (BDQOPEN == false) { BaseOpen(); BDQOPEN = true; }
         }
 
@@ -68,6 +74,9 @@ namespace Warehouse_Rys
             windowStartStackPanel.Visibility = Visibility.Hidden;
             DataStany.Visibility = Visibility.Hidden;
             DataOrder.Visibility = Visibility.Visible;
+            btnAdd.Visibility = Visibility.Visible;
+            btnsearch.Visibility = Visibility.Visible;
+            searchbox.Visibility = Visibility.Visible;
         }
 
 
@@ -99,6 +108,11 @@ namespace Warehouse_Rys
                 }
                 conn.Close();
             }
+        }
+
+        private void clicBtnAdd(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
