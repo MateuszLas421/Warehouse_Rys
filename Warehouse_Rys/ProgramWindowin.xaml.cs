@@ -109,10 +109,26 @@ namespace Warehouse_Rys
                 conn.Close();
             }
         }
-
+         private void workinprogress()
+        {
+            MessageBox.Show("work in progress");
+        }
         private void clicBtnAdd(object sender, RoutedEventArgs e)
         {
+            workinprogress();
+            //AddProduktWindow okno1 = new AddProduktWindow();     
+            //okno1.ShowDialog();
+        }
 
+        private void SettingsMenu_Click(object sender, RoutedEventArgs e)
+        {
+            workinprogress();
+        }
+
+        private void AddNewProduct_Click(object sender, RoutedEventArgs e)
+        {
+            AddProduktWindow okno1 = new AddProduktWindow();
+            okno1.ShowDialog();
         }
     }
 }

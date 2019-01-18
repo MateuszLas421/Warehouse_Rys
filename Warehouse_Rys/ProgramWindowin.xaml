@@ -17,16 +17,19 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Menu Grid.Row="0" Grid.Column="0" Margin="2">
-            <MenuItem Header="Plik">
+        <Menu Grid.Row="0" Grid.Column="0" >
+            <MenuItem Header="Plik" Margin="2">
+                <MenuItem Header="Ustawienia" Click="SettingsMenu_Click"/>
                 <MenuItem Header="Zamknij" Click="Exit_Click"/>
             </MenuItem>
+            <MenuItem Header="Baza Danych" Margin="2">
+                <MenuItem x:Name="AddNewProduct" Header="Dodaj" Margin="2" Click="AddNewProduct_Click" />
+            </MenuItem>
         </Menu>
-        <Menu Grid.Row="1" Grid.Column="0" Margin="5">
-            <MenuItem Header="Start" Click="MenuItem_Start"/>
-            <MenuItem Header="Stany" Click="MenuItem_ListaStany"/>
-            <MenuItem Header="Zamówienie" Click="MenuItem_Zamowienie"/>
-            <MenuItem Header=""/>
+        <Menu Grid.Row="1" Grid.Column="0">
+            <MenuItem Header="Start"  Margin="2" Click="MenuItem_Start"/>
+            <MenuItem Header="Stany"  Margin="2" Click="MenuItem_ListaStany"/>
+            <MenuItem Header="Zamówienie"  Margin="2" Click="MenuItem_Zamowienie"/>
         </Menu>
 
         <StackPanel x:Name="windowStartStackPanel" Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="1" Margin="5">
@@ -42,7 +45,8 @@
                     <DataGridTextColumn Header="Quantity" Binding="{Binding QuantityProdukt}" >
                     </DataGridTextColumn>
                 </DataGrid.Columns>
-            </DataGrid>
+        </DataGrid>
+        
         <Grid Grid.Row="3" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
