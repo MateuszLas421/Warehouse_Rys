@@ -16,9 +16,7 @@ using System.Windows.Shapes;
 
 namespace Warehouse_Rys
 {
-    /// <summary>
-    /// Interaction logic for AddProduktWindow.xaml
-    /// </summary>
+
     public partial class AddProduktWindow : Window
     {
         private ObservableCollection<string> ProductsSupplier = null;
