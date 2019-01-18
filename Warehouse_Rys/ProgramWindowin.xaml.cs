@@ -31,7 +31,7 @@ namespace Warehouse_Rys
             InitializeComponent();
             OpenWindow_Program();
         }
-
+ 
         private void OpenWindow_Program()
         {
             QuantityProducts = new ObservableCollection<Quantity>();
@@ -48,6 +48,21 @@ namespace Warehouse_Rys
 
         }
 
+        #region <<Main Menu>>
+
+        private void SettingsMenu_Click(object sender, RoutedEventArgs e)
+        {
+            workinprogress();
+        }
+
+        private void AddNewProduct_Click(object sender, RoutedEventArgs e)
+        {
+            AddProduktWindow okno1 = new AddProduktWindow();
+            okno1.ShowDialog();
+        }
+        #endregion
+
+        #region <<Menu>>
         private void MenuItem_Start(object sender, RoutedEventArgs e)
         {
             windowStartStackPanel.Visibility = Visibility.Visible;
@@ -78,7 +93,7 @@ namespace Warehouse_Rys
             btnsearch.Visibility = Visibility.Visible;
             searchbox.Visibility = Visibility.Visible;
         }
-
+        #endregion
 
         private void BaseOpen()
         {
@@ -120,15 +135,5 @@ namespace Warehouse_Rys
             //okno1.ShowDialog();
         }
 
-        private void SettingsMenu_Click(object sender, RoutedEventArgs e)
-        {
-            workinprogress();
-        }
-
-        private void AddNewProduct_Click(object sender, RoutedEventArgs e)
-        {
-            AddProduktWindow okno1 = new AddProduktWindow();
-            okno1.ShowDialog();
-        }
     }
 }
