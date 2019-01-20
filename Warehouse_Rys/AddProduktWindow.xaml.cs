@@ -23,6 +23,7 @@ namespace Warehouse_Rys
         public AddProduktWindow()
         {
             InitializeComponent();
+            ProductsSupplier = new ObservableCollection<string>();
             using (var conn = new SQLiteConnection(@"Data Source=Base.s3db;Version=3;New=False"))
             {
                 try
@@ -38,11 +39,12 @@ namespace Warehouse_Rys
                 {
                     using (var rdr = cmd.ExecuteReader())
                     {
-                        string a = null;
+                        
                         while (rdr.Read())
                         {
+                            string a = null;
                             a = rdr.GetString(0);
-                            ProductsSupplier.Add(a);   // coś się sypie
+                            ProductsSupplier.Add(a); 
                         }
                     }
                 }
@@ -53,7 +55,40 @@ namespace Warehouse_Rys
 
         private void btnPotwierdz_Click(object sender, RoutedEventArgs e)
         {
+            using (var conn = new SQLiteConnection(@"Data Source=Base.s3db;Version=3;New=False"))
+            {
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "problem z połączeniem?");
+                }
+                string strsql = "Select Products.Name,EAN from Products join SupplierTable on SupplierTable.Id=Products.Supplier_ID where Products.Name = '" + 
+                    AddNameTextB.Text.ToString() + "' or EAN = '"+ AddEANTextB.Text.ToString()+"'";
+                using (SQLiteCommand cmd = new SQLiteCommand(strsql, conn))
+                {
+                    using (var rdr = cmd.ExecuteReader())
+                    {
 
+                        if (rdr.HasRows)
+                        {
+                            AddNameTextB.BorderBrush = Brushes.Red;
+                            AddEANTextB.BorderBrush = Brushes.Red;
+                        }
+                        else
+                        {
+                            string AddEANTextB_String=AddEANTextB.Text.ToString();
+                            if (13 == AddEANTextB_String.Length || AddEANTextB_String.Length==9)
+                            {
+
+                            }
+                        }
+                    }
+                }
+                conn.Close();
+            }
         }
     }
 }

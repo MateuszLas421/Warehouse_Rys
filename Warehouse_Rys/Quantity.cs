@@ -12,7 +12,6 @@ namespace Warehouse_Rys
         {
             QuantityProdukt = v;
         }
-
         public  int QuantityID { get; set; }
         public int QuantityProdukt { get; set; }
     }
