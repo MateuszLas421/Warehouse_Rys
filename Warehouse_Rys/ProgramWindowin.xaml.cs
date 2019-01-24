@@ -16,12 +16,9 @@ using System.Windows.Shapes;
 
 namespace Warehouse_Rys
 {
-    /// <summary>
-    /// Interaction logic for ProgramWindowin.xaml
-    /// </summary>
     public partial class ProgramWindowin : Window
     {
-        private ObservableCollection<Quantity> QuantityProducts = null;
+        private ObservableCollection<Quantity> QuantityProducts;
         private bool BDQOPEN = false;
 
         public bool BDQOPEN1 { get => BDQOPEN; set => BDQOPEN = value; }
@@ -34,13 +31,9 @@ namespace Warehouse_Rys
  
         private void OpenWindow_Program()
         {
+            QuantityProducts = null;
             QuantityProducts = new ObservableCollection<Quantity>();
             DataStany.ItemsSource = QuantityProducts;
-        }
-
-        private void Exit_Click(object sender, RoutedEventArgs e) // zamykanie z menu
-        {
-            this.Close();
         }
 
         private void Exit_Click(object sender, EventArgs e)  //zamykanie okna 
@@ -48,17 +41,26 @@ namespace Warehouse_Rys
 
         }
 
-        #region <<Main Menu>>
-
+        #region <<Open Menu>>
+        private void UpdateBase_Click(object sender, RoutedEventArgs e)
+        {
+            BDQOPEN = false;
+            OpenWindow_Program();
+            BaseOpen();
+        }
         private void SettingsMenu_Click(object sender, RoutedEventArgs e)
         {
             workinprogress();
         }
 
-        private void AddNewProduct_Click(object sender, RoutedEventArgs e)
+        private void AddNewProductMenu_Click(object sender, RoutedEventArgs e)
         {
             AddProduktWindow okno1 = new AddProduktWindow();
             okno1.ShowDialog();
+        }
+        private void Exit_Click_Menu(object sender, RoutedEventArgs e) // zamykanie z menu
+        {
+            this.Close();
         }
         #endregion
 
@@ -81,7 +83,7 @@ namespace Warehouse_Rys
             btnAdd.Visibility = Visibility.Hidden;
             btnsearch.Visibility = Visibility.Visible;
             searchbox.Visibility = Visibility.Visible;
-            if (BDQOPEN == false) { BaseOpen(); BDQOPEN = true; }
+            if (BDQOPEN == false)  BaseOpen();
         }
 
         private void MenuItem_Zamowienie(object sender, RoutedEventArgs e)
@@ -116,13 +118,12 @@ namespace Warehouse_Rys
                         {
                             Quantity a = new Quantity(rdr.GetInt32(0),rdr.GetString(1), rdr.GetString(2), rdr.GetInt32(3));
                             QuantityProducts.Add(a);
-                            // MessageBox.Show(a.Name.ToString()+" "+a.EAN.ToString()+" "+a.QuantityProdukt.ToString());
                         }
-                        //DataStany.ItemsSource = QuantityProducts;
                     }
                 }
                 conn.Close();
             }
+         BDQOPEN = true;
         }
          private void workinprogress()
         {
@@ -134,6 +135,5 @@ namespace Warehouse_Rys
             //AddProduktWindow okno1 = new AddProduktWindow();     
             //okno1.ShowDialog();
         }
-
     }
 }

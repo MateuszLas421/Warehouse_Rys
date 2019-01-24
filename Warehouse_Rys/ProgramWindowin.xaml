@@ -20,10 +20,11 @@
         <Menu Grid.Row="0" Grid.Column="0" >
             <MenuItem Header="Plik" Margin="2">
                 <MenuItem Header="Ustawienia" Click="SettingsMenu_Click"/>
-                <MenuItem Header="Zamknij" Click="Exit_Click"/>
+                <MenuItem Header="Zamknij" Click="Exit_Click_Menu"/>
             </MenuItem>
             <MenuItem Header="Baza Danych" Margin="2">
-                <MenuItem x:Name="AddNewProduct" Header="Dodaj" Margin="2" Click="AddNewProduct_Click" />
+                <MenuItem x:Name="UpdateBase" Header="Odśwież" Margin="2" Click="UpdateBase_Click" />
+                <MenuItem x:Name="AddNewProduct" Header="Dodaj" Margin="2" Click="AddNewProductMenu_Click" />
             </MenuItem>
         </Menu>
         <Menu Grid.Row="1" Grid.Column="0">

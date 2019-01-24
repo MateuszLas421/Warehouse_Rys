@@ -20,6 +20,8 @@ namespace Warehouse_Rys
     public partial class AddProduktWindow : Window
     {
         private ObservableCollection<string> ProductsSupplier = null;
+        int idIndeksP= 0;
+        int idIndeksQ = 0;
         public AddProduktWindow()
         {
             InitializeComponent();
@@ -35,7 +37,7 @@ namespace Warehouse_Rys
                     MessageBox.Show(ex.Message + "problem z połączeniem?");
                 }
                 string strsql = "Select Name from SupplierTable";
-                using (SQLiteCommand cmd = new SQLiteCommand(strsql, conn))
+                using (var cmd = new SQLiteCommand(strsql, conn))
                 {
                     using (var rdr = cmd.ExecuteReader())
                     {
@@ -51,6 +53,42 @@ namespace Warehouse_Rys
                 conn.Close();
             }
             SupplierComboBox.ItemsSource = ProductsSupplier;
+            using (var conn = new SQLiteConnection(@"Data Source=Base.s3db;Version=3;New=False"))
+            {
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "problem z połączeniem?");
+                }
+                var strsql = "Select count(*) from Products";
+                using (var cmd = new SQLiteCommand(strsql, conn))
+                {
+                    using (var rdr = cmd.ExecuteReader())
+                    {
+
+                        while (rdr.Read())
+                        {
+                            idIndeksP = rdr.GetInt32(0);
+                        }
+                    }
+                }
+                strsql = "Select count(*) from Quantity";
+                using (var cmd = new SQLiteCommand(strsql, conn))
+                {
+                    using (var rdr = cmd.ExecuteReader())
+                    {
+
+                        while (rdr.Read())
+                        {
+                            idIndeksQ = rdr.GetInt32(0);
+                        }
+                    }
+                }
+                conn.Close();
+            }
         }
 
         private void btnPotwierdz_Click(object sender, RoutedEventArgs e)
@@ -67,7 +105,7 @@ namespace Warehouse_Rys
                 }
                 string strsql = "Select Products.Name,EAN from Products join SupplierTable on SupplierTable.Id=Products.Supplier_ID where Products.Name = '" + 
                     AddNameTextB.Text.ToString() + "' or EAN = '"+ AddEANTextB.Text.ToString()+"'";
-                using (SQLiteCommand cmd = new SQLiteCommand(strsql, conn))
+                using (var cmd = new SQLiteCommand(strsql, conn))
                 {
                     using (var rdr = cmd.ExecuteReader())
                     {
@@ -80,15 +118,51 @@ namespace Warehouse_Rys
                         else
                         {
                             string AddEANTextB_String=AddEANTextB.Text.ToString();
-                            if (13 == AddEANTextB_String.Length || AddEANTextB_String.Length==9)
+                            if (13 == AddEANTextB_String.Length || AddEANTextB_String.Length == 9)
                             {
-
+                                strsql = "INSERT INTO Quantity (Quantity_Product) VALUES (@Quantity_Product)";
+                                using (var insertSQL = new SQLiteCommand(strsql, conn))
+                                {
+                                    insertSQL.Parameters.AddWithValue("@Quantity_Product", 0);
+                                    try
+                                    {
+                                        insertSQL.ExecuteNonQuery();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        throw new Exception(ex.Message);
+                                    }
+                                }
+                                strsql = "INSERT INTO Products (Name,EAN,Supplier_ID,Quantity_ID) VALUES (@Name,@EAN,@Supplier_ID,@Quantity_ID)";
+                                using (var insertSQL = new SQLiteCommand(strsql, conn))
+                                {
+                                    insertSQL.Parameters.AddWithValue("@Name", AddNameTextB.Text);
+                                    insertSQL.Parameters.AddWithValue("@EAN", AddEANTextB.Text);
+                                    insertSQL.Parameters.AddWithValue("@Supplier_ID", 1);
+                                    insertSQL.Parameters.AddWithValue("@Quantity_ID", idIndeksQ);
+                                    try
+                                    {
+                                        insertSQL.ExecuteNonQuery();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        throw new Exception(ex.Message);
+                                    }
+                                }
                             }
+                            else
+                            {
+                                AddNameTextB.BorderBrush = Brushes.Red;
+                                AddEANTextB.BorderBrush = Brushes.Red;
+                                MessageBox.Show("zła długość kodu EAN");
+                            }
+                           
                         }
                     }
                 }
                 conn.Close();
             }
+        this.DialogResult = true;
         }
     }
 }
