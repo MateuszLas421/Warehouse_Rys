@@ -75,7 +75,7 @@ namespace Warehouse_Rys
                         }
                     }
                 }
-                strsql = "Select count(*) from Quantity";
+                strsql = "Select id from Quantity";
                 using (var cmd = new SQLiteCommand(strsql, conn))
                 {
                     using (var rdr = cmd.ExecuteReader())
@@ -86,11 +86,11 @@ namespace Warehouse_Rys
                             idIndeksQ = rdr.GetInt32(0);
                         }
                     }
+                    idIndeksQ++;
                 }
                 conn.Close();
             }
         }
-
         private void btnPotwierdz_Click(object sender, RoutedEventArgs e)
         {
             using (var conn = new SQLiteConnection(@"Data Source=Base.s3db;Version=3;New=False"))
@@ -120,9 +120,10 @@ namespace Warehouse_Rys
                             string AddEANTextB_String=AddEANTextB.Text.ToString();
                             if (13 == AddEANTextB_String.Length || AddEANTextB_String.Length == 9)
                             {
-                                strsql = "INSERT INTO Quantity (Quantity_Product) VALUES (@Quantity_Product)";
+                                strsql = "INSERT INTO Quantity (ID,Quantity_Product) VALUES (@ID,@Quantity_Product)";
                                 using (var insertSQL = new SQLiteCommand(strsql, conn))
                                 {
+                                    insertSQL.Parameters.AddWithValue("@ID", idIndeksQ);
                                     insertSQL.Parameters.AddWithValue("@Quantity_Product", 0);
                                     try
                                     {

@@ -97,6 +97,7 @@ namespace Warehouse_Rys
         }
         #endregion
 
+        #region <<Base>>
         private void BaseOpen()
         {
             using (var conn = new SQLiteConnection(@"Data Source=Base.s3db;Version=3;New=False"))
@@ -125,15 +126,14 @@ namespace Warehouse_Rys
             }
          BDQOPEN = true;
         }
-         private void workinprogress()
+        #endregion
+        private void workinprogress()
         {
             MessageBox.Show("work in progress");
         }
         private void clicBtnAdd(object sender, RoutedEventArgs e)
         {
-            workinprogress();
-            //AddProduktWindow okno1 = new AddProduktWindow();     
-            //okno1.ShowDialog();
+            workinprogress();;
         }
     }
 }
