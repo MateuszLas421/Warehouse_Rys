@@ -34,7 +34,9 @@
         </Menu>
 
         <StackPanel x:Name="windowStartStackPanel" Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="1" Margin="5">
-            <TextBlock Text="sdasdsa      Start Window     ddddddddd"/>
+            <TextBlock Text="     Start Window         Start Window     Start Window     Start Window     Start Window     
+                       Start Window     Start Window"/>
+            <Image Height="224" Margin="297,0,260,0" Source="pobrane.png" Stretch="Fill"/>
         </StackPanel>
         
         <DataGrid x:Name="DataStany" Visibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Margin="5"
