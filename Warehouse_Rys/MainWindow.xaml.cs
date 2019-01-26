@@ -40,15 +40,15 @@ namespace Warehouse_Rys
             Login_user.Ok = false;
 
                                                                                             ///tymczasowe obejście
-            /*var ProgramWindow = new ProgramWindowin();
-            this.Close();
-            ProgramWindow.Show();*/
+            //var ProgramWindow = new ProgramWindowin();
+            //this.Close();
+            //ProgramWindow.Show();
 
         }
 
         public void LoadData()
         {
-            Login_user.Password_log = passwordBox.Text;
+            Login_user.Password_log = passwordBox.Password;
             Login_user.Login1 = loginBox.Text;
             try
             {
@@ -95,6 +95,12 @@ namespace Warehouse_Rys
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             LoadData();
+        }
+
+        private void Rejestracja_Click(object sender, RoutedEventArgs e)
+        {
+            var registrationWin = new RegistrationWindow();
+            registrationWin.ShowDialog();
         }
     }
 }

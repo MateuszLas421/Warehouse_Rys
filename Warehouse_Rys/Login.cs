@@ -13,6 +13,8 @@ namespace Warehouse_Rys
         private string _login;
         private String _password;
         private bool ok;
+        private string _name;
+        private string _surname;
 
         public Login()
         {
@@ -41,6 +43,22 @@ namespace Warehouse_Rys
             set
             {
                 if (ok != value) { ok = value;  }
+            }
+        }
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (_name != value) { _name = value; }
+            }
+        }
+        public string Surname
+        {
+            get => _surname;
+            set
+            {
+                if (_surname != value) { _surname = value; }
             }
         }
     }

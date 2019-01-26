@@ -16,31 +16,29 @@ using System.Windows.Shapes;
 
 namespace Warehouse_Rys
 {
-    /// <summary>
-    /// Interaction logic for ProgramWindowin.xaml
-    /// </summary>
     public partial class ProgramWindowin : Window
     {
-        private ObservableCollection<Quantity> QuantityProducts = null;
         private bool BDQOPEN = false;
+        public string result;
 
         public bool BDQOPEN1 { get => BDQOPEN; set => BDQOPEN = value; }
-
+        internal ObservableCollection<Quantity> QuantityProducts1 { get; set; }
+        internal ObservableCollection<Quantity> OrderProducts { get; set; }
+        Window_result _Result = new Window_result();
         public ProgramWindowin()
         {
             InitializeComponent();
             OpenWindow_Program();
         }
- 
+
         private void OpenWindow_Program()
         {
-            QuantityProducts = new ObservableCollection<Quantity>();
-            DataStany.ItemsSource = QuantityProducts;
-        }
-
-        private void Exit_Click(object sender, RoutedEventArgs e) // zamykanie z menu
-        {
-            this.Close();
+            QuantityProducts1 = null;
+            QuantityProducts1 = new ObservableCollection<Quantity>();
+            OrderProducts = null;
+            OrderProducts=new ObservableCollection<Quantity>();
+            DataStany.ItemsSource = QuantityProducts1;
+            DataOrder.ItemsSource = OrderProducts;
         }
 
         private void Exit_Click(object sender, EventArgs e)  //zamykanie okna 
@@ -48,17 +46,26 @@ namespace Warehouse_Rys
 
         }
 
-        #region <<Main Menu>>
-
+        #region <<Open Menu>>
+        private void UpdateBase_Click(object sender, RoutedEventArgs e)
+        {
+            BDQOPEN = false;
+            OpenWindow_Program();
+            BaseOpen();
+        }
         private void SettingsMenu_Click(object sender, RoutedEventArgs e)
         {
             workinprogress();
         }
 
-        private void AddNewProduct_Click(object sender, RoutedEventArgs e)
+        private void AddNewProductMenu_Click(object sender, RoutedEventArgs e)
         {
             AddProduktWindow okno1 = new AddProduktWindow();
             okno1.ShowDialog();
+        }
+        private void Exit_Click_Menu(object sender, RoutedEventArgs e) // zamykanie z menu
+        {
+            this.Close();
         }
         #endregion
 
@@ -71,6 +78,7 @@ namespace Warehouse_Rys
             btnAdd.Visibility = Visibility.Hidden;
             btnsearch.Visibility = Visibility.Hidden;
             searchbox.Visibility = Visibility.Hidden;
+            btnZamow.Visibility = Visibility.Hidden;
         }
 
         private void MenuItem_ListaStany(object sender, RoutedEventArgs e)
@@ -81,7 +89,8 @@ namespace Warehouse_Rys
             btnAdd.Visibility = Visibility.Hidden;
             btnsearch.Visibility = Visibility.Visible;
             searchbox.Visibility = Visibility.Visible;
-            if (BDQOPEN == false) { BaseOpen(); BDQOPEN = true; }
+            btnZamow.Visibility = Visibility.Hidden;
+            if (BDQOPEN == false) BaseOpen();
         }
 
         private void MenuItem_Zamowienie(object sender, RoutedEventArgs e)
@@ -92,9 +101,11 @@ namespace Warehouse_Rys
             btnAdd.Visibility = Visibility.Visible;
             btnsearch.Visibility = Visibility.Visible;
             searchbox.Visibility = Visibility.Visible;
+            btnZamow.Visibility = Visibility.Hidden;
         }
         #endregion
 
+        #region <<Base>>
         private void BaseOpen()
         {
             using (var conn = new SQLiteConnection(@"Data Source=Base.s3db;Version=3;New=False"))
@@ -107,33 +118,61 @@ namespace Warehouse_Rys
                 {
                     MessageBox.Show(ex.Message + "problem z połączeniem?");
                 }
-                string strsql = "Select Products.ID, Name, EAN, Quantity_Product from Products join QUANTITY on Products.Quantity_ID=QUANTITY.ID";
+                string strsql = "Select Products.ID, Name, EAN, Quantity_Product, Products.Quantity_ID from Products join QUANTITY on Products.Quantity_ID=QUANTITY.ID";
                 using (SQLiteCommand cmd = new SQLiteCommand(strsql, conn))
                 {
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
                         while (rdr.Read())
                         {
-                            Quantity a = new Quantity(rdr.GetInt32(0),rdr.GetString(1), rdr.GetString(2), rdr.GetInt32(3));
-                            QuantityProducts.Add(a);
-                            // MessageBox.Show(a.Name.ToString()+" "+a.EAN.ToString()+" "+a.QuantityProdukt.ToString());
+                            Quantity a = new Quantity(rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetInt32(3), rdr.GetInt32(4));
+                            QuantityProducts1.Add(a);
                         }
-                        //DataStany.ItemsSource = QuantityProducts;
                     }
                 }
                 conn.Close();
             }
+            BDQOPEN = true;
         }
-         private void workinprogress()
+        #endregion
+
+        private void order()
+        {
+
+        }
+        private void workinprogress()
         {
             MessageBox.Show("work in progress");
         }
+        /*private bool FiltrUzytkownika(object item)
+        {
+            if (String.IsNullOrEmpty(txtFilter.Text))
+                return true;
+            else
+                return ((item as Produkt).Nazwa.IndexOf(txtFilter.Text,
+                    StringComparison.OrdinalIgnoreCase) >= 0);
+        }*/
+
         private void clicBtnAdd(object sender, RoutedEventArgs e)
         {
-            workinprogress();
-            //AddProduktWindow okno1 = new AddProduktWindow();     
-            //okno1.ShowDialog();
+            var orderWindow = new orderwindow(QuantityProducts1,_Result);
+            orderWindow.ShowDialog();
+            for (int i = 0; i < QuantityProducts1.Count(); i++)
+            {
+                if (QuantityProducts1[i].Name == _Result.Result)
+                {
+                    OrderProducts.Add(QuantityProducts1[i]);
+                    int a = OrderProducts.Count();
+                    OrderProducts[a-1].QuantityProdukt += _Result.Order;
+                }
+            }
+            if(btnZamow.Visibility==Visibility.Hidden) btnZamow.Visibility = Visibility.Visible;
         }
 
+        private void clicBtnOrder(object sender, RoutedEventArgs e)
+        {
+            Order order = new Order();
+            order.Orderload(OrderProducts);
+        }
     }
 }

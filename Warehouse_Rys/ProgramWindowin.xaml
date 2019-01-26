@@ -20,10 +20,11 @@
         <Menu Grid.Row="0" Grid.Column="0" >
             <MenuItem Header="Plik" Margin="2">
                 <MenuItem Header="Ustawienia" Click="SettingsMenu_Click"/>
-                <MenuItem Header="Zamknij" Click="Exit_Click"/>
+                <MenuItem Header="Zamknij" Click="Exit_Click_Menu"/>
             </MenuItem>
             <MenuItem Header="Baza Danych" Margin="2">
-                <MenuItem x:Name="AddNewProduct" Header="Dodaj" Margin="2" Click="AddNewProduct_Click" />
+                <MenuItem x:Name="UpdateBase" Header="Odśwież" Margin="2" Click="UpdateBase_Click" />
+                <MenuItem x:Name="AddNewProduct" Header="Dodaj" Margin="2" Click="AddNewProductMenu_Click" />
             </MenuItem>
         </Menu>
         <Menu Grid.Row="1" Grid.Column="0">
@@ -59,6 +60,7 @@
             </Grid.ColumnDefinitions>
             <TextBox x:Name="searchbox" Grid.Row="0" Grid.Column="0" Margin="5" Visibility="Hidden"/>
             <Button x:Name="btnsearch" Grid.Row="0" Grid.Column="1" Content="Search" Visibility="Hidden" Margin="5"/>
+            <Button x:Name="btnZamow" Grid.Column="2" Grid.Row="0" Margin="5" Click="clicBtnOrder" Visibility="Hidden"/>
             <Button x:Name="btnAdd" Grid.Row="0" Grid.Column="3" Content="ADD" Click="clicBtnAdd" Visibility="Hidden" Margin="5"/>
         </Grid>
 
