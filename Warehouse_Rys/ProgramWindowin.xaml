@@ -60,6 +60,7 @@
             </Grid.ColumnDefinitions>
             <TextBox x:Name="searchbox" Grid.Row="0" Grid.Column="0" Margin="5" Visibility="Hidden"/>
             <Button x:Name="btnsearch" Grid.Row="0" Grid.Column="1" Content="Search" Visibility="Hidden" Margin="5"/>
+            <Button x:Name="btnZamow" Grid.Column="2" Grid.Row="0" Margin="5" Click="clicBtnOrder" Visibility="Hidden"/>
             <Button x:Name="btnAdd" Grid.Row="0" Grid.Column="3" Content="ADD" Click="clicBtnAdd" Visibility="Hidden" Margin="5"/>
         </Grid>
 

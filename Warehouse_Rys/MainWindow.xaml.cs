@@ -101,7 +101,6 @@ namespace Warehouse_Rys
         {
             var registrationWin = new RegistrationWindow();
             registrationWin.ShowDialog();
-
         }
     }
 }
