@@ -38,12 +38,6 @@ namespace Warehouse_Rys
             Login_user.Login1 = String.Empty;
             Login_user.Password_log = String.Empty;
             Login_user.Ok = false;
-
-                                                                                            ///tymczasowe obejście
-            //var ProgramWindow = new ProgramWindowin();
-            //this.Close();
-            //ProgramWindow.Show();
-
         }
 
         public void LoadData()

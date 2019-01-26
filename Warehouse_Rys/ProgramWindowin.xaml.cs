@@ -18,7 +18,7 @@ namespace Warehouse_Rys
 {
     public partial class ProgramWindowin : Window
     {
-        private bool BDQOPEN = false;
+        private bool BDQOPEN;
         public string result;
 
         public bool BDQOPEN1 { get => BDQOPEN; set => BDQOPEN = value; }
@@ -29,6 +29,7 @@ namespace Warehouse_Rys
         {
             InitializeComponent();
             OpenWindow_Program();
+            BDQOPEN1 = false;
         }
 
         private void OpenWindow_Program()
@@ -45,13 +46,17 @@ namespace Warehouse_Rys
         {
 
         }
+        private void update()
+        {
+            BDQOPEN1 = false;
+            OpenWindow_Program();
+            BaseOpen();
+        }
 
         #region <<Open Menu>>
         private void UpdateBase_Click(object sender, RoutedEventArgs e)
         {
-            BDQOPEN = false;
-            OpenWindow_Program();
-            BaseOpen();
+            update();
         }
         private void SettingsMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -90,7 +95,7 @@ namespace Warehouse_Rys
             btnsearch.Visibility = Visibility.Visible;
             searchbox.Visibility = Visibility.Visible;
             btnZamow.Visibility = Visibility.Hidden;
-            if (BDQOPEN == false) BaseOpen();
+            if (BDQOPEN1 == false) BaseOpen();
         }
 
         private void MenuItem_Zamowienie(object sender, RoutedEventArgs e)
@@ -132,14 +137,10 @@ namespace Warehouse_Rys
                 }
                 conn.Close();
             }
-            BDQOPEN = true;
+            BDQOPEN1 = true;
         }
         #endregion
 
-        private void order()
-        {
-
-        }
         private void workinprogress()
         {
             MessageBox.Show("work in progress");
@@ -171,8 +172,10 @@ namespace Warehouse_Rys
 
         private void clicBtnOrder(object sender, RoutedEventArgs e)
         {
+            if (BDQOPEN1 == false) BaseOpen();
             Order order = new Order();
             order.Orderload(OrderProducts);
+            update();
         }
     }
 }

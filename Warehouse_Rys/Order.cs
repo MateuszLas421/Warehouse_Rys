@@ -33,7 +33,6 @@ namespace Warehouse_Rys
                     {
                         updatesQLite.Parameters.Add("quantity", System.Data.DbType.Int32).Value = a[i].QuantityProdukt;
                         updatesQLite.Parameters.Add("id", System.Data.DbType.Int32).Value = a[i].QuantityID;
-                        MessageBox.Show(a[i].QuantityProdukt + " "+ a[i].QuantityID);
                         try
                         {
                             updatesQLite.ExecuteNonQuery();
