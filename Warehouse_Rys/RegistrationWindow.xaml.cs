@@ -61,7 +61,6 @@ namespace Warehouse_Rys
                 }
             }
             CBpermissions.ItemsSource = permisionslist;
-            MessageBox.Show(permisionslist[1]);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
