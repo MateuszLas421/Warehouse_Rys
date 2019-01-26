@@ -41,7 +41,7 @@ namespace Warehouse_Rys
                         string a = null;
                         while (rdr.Read())
                         {
-                            a = rdr.GetString(0);
+                            a = rdr.GetString(0).ToString();
                             ProductsSupplier.Add(a);   // coś się sypie
                         }
                     }

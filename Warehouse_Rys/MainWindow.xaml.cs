@@ -40,9 +40,9 @@ namespace Warehouse_Rys
             Login_user.Ok = false;
 
                                                                                             ///tymczasowe obejście
-            var ProgramWindow = new ProgramWindowin();
+            /*var ProgramWindow = new ProgramWindowin();
             this.Close();
-            ProgramWindow.Show();
+            ProgramWindow.Show();*/
 
         }
 

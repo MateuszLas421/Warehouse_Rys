@@ -110,7 +110,7 @@ namespace Warehouse_Rys
                 string strsql = "Select Products.ID, Name, EAN, Quantity_Product from Products join QUANTITY on Products.Quantity_ID=QUANTITY.ID";
                 using (SQLiteCommand cmd = new SQLiteCommand(strsql, conn))
                 {
-                    using (var rdr = cmd.ExecuteReader())
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
                         while (rdr.Read())
                         {
