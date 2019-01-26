@@ -42,10 +42,6 @@ namespace Warehouse_Rys
             DataOrder.ItemsSource = OrderProducts;
         }
 
-        private void Exit_Click(object sender, EventArgs e)  //zamykanie okna 
-        {
-
-        }
         private void update()
         {
             BDQOPEN1 = false;
