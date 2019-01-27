@@ -63,6 +63,7 @@ namespace Warehouse_Rys
         {
             AddProduktWindow okno1 = new AddProduktWindow();
             okno1.ShowDialog();
+            update();
         }
         private void Exit_Click_Menu(object sender, RoutedEventArgs e) // zamykanie z menu
         {
@@ -148,10 +149,11 @@ namespace Warehouse_Rys
             else
                 return ((item as Produkt).Nazwa.IndexOf(txtFilter.Text,
                     StringComparison.OrdinalIgnoreCase) >= 0);
-        }*/
+        }*/                                                          // not working 
 
-        private void clicBtnAdd(object sender, RoutedEventArgs e)
+        private void clicBtnAdd(object sender, RoutedEventArgs e) // menu// down //order
         {
+            if (BDQOPEN1 == false) BaseOpen();
             var orderWindow = new orderwindow(QuantityProducts1,_Result);
             orderWindow.ShowDialog();
             for (int i = 0; i < QuantityProducts1.Count(); i++)
@@ -167,8 +169,7 @@ namespace Warehouse_Rys
         }
 
         private void clicBtnOrder(object sender, RoutedEventArgs e)
-        {
-            if (BDQOPEN1 == false) BaseOpen();
+        { 
             Order order = new Order();
             order.Orderload(OrderProducts);
             update();

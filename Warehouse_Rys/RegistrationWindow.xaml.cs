@@ -127,7 +127,8 @@ namespace Warehouse_Rys
                                        {
                                            throw new Exception(ex.Message);
                                        }
-                                   }
+                                    MessageBox.Show("zarejestrowano");
+                                    }
                                }
                         }
                     }
