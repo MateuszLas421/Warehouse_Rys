@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Warehouse_Rys
 {
-    class Produkt
+    abstract class Produkt
     {
         public int ID { get; set; }
         public string Name { get; set; }
