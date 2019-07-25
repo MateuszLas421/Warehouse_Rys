@@ -1,0 +1,80 @@
+﻿<Window x:Class="Warehouse_Rys.ProgramWindowin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Warehouse_Rys"
+        mc:Ignorable="d"
+        Title="Werehouse_Rys" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" Grid.Column="0" >
+            <MenuItem Header="Plik" Margin="2">
+                <MenuItem Header="Ustawienia" Click="SettingsMenu_Click"/>
+                <MenuItem Header="Zamknij" Click="Exit_Click_Menu"/>
+            </MenuItem>
+            <MenuItem Header="Baza Danych" Margin="2">
+                <MenuItem x:Name="UpdateBase" Header="Odśwież" Margin="2" Click="UpdateBase_Click" />
+                <MenuItem x:Name="AddNewProduct" Header="Dodaj" Margin="2" Click="AddNewProductMenu_Click" />
+            </MenuItem>
+        </Menu>
+        <Menu Grid.Row="1" Grid.Column="0">
+            <MenuItem Header="Start"  Margin="2" Click="MenuItem_Start"/>
+            <MenuItem Header="Stany"  Margin="2" Click="MenuItem_ListaStany"/>
+            <MenuItem Header="Zamówienie"  Margin="2" Click="MenuItem_Zamowienie"/>
+        </Menu>
+
+        <StackPanel x:Name="windowStartStackPanel" Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="1" Margin="5">
+            <TextBlock Text="     Start Window         Start Window     Start Window     Start Window     Start Window     
+                       Start Window     Start Window"/>
+            <Image Height="224" Margin="297,0,260,0" Source="pobrane.png" Stretch="Fill"/>
+        </StackPanel>
+        
+        <DataGrid x:Name="DataStany" Visibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Margin="5"
+                  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue" GridLinesVisibility="None" IsReadOnly="True" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="EAN" Binding="{Binding EAN}"/>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding QuantityProdukt}" >
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+        </DataGrid>
+        
+        <Grid Grid.Row="3" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="searchbox" Grid.Row="0" Grid.Column="0" Margin="5" Visibility="Hidden"/>
+            <Button x:Name="btnsearch" Grid.Row="0" Grid.Column="1" Content="Search" Visibility="Hidden" Margin="5"/>
+            <Button x:Name="btnZamow" Grid.Column="2" Grid.Row="0" Content="Zamów" Margin="5" Click="clicBtnOrder" Visibility="Hidden"/>
+            <Button x:Name="btnAdd" Grid.Row="0" Grid.Column="3" Content="Dodaj" Click="clicBtnAdd" Visibility="Hidden" Margin="5"/>
+        </Grid>
+
+        <DataGrid x:Name="DataOrder" Visibility="Hidden" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Margin="5"
+                  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue" GridLinesVisibility="None" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="EAN" Binding="{Binding EAN}"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding QuantityProdukt}" >
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

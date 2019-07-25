@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse_Rys"
         mc:Ignorable="d"
-        Title="MainWindow" Height="150" Width="200">
+        Title="Login" Height="160" Width="210"        >
     <Grid>
         <StackPanel>
             <Grid>
@@ -13,20 +13,21 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Login:" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Login_user.Login1}" Grid.Row="0" Grid.Column="1" Width = "120" Margin = "5"/>
+                <TextBox x:Name="loginBox" Text="" Grid.Row="0" Grid.Column="1" Width = "120" Margin = "5"/>
                 <Label Content="Password:" Grid.Row="1" Grid.Column="0"/>
                 <PasswordBox x:Name="passwordBox" Grid.Row="1" Grid.Column="1" Width = "120" Margin = "5"/>
-                <Button Content="Sprawdź" Height="20" Width="100" VerticalAlignment="Bottom" 
-                HorizontalAlignment="Right" Margin="20" Command="{Binding Sprawdz}" 
-                        Grid.Row="2" Grid.Column="1"/>
-                <TextBox Text="{Binding Login.Ok}" Grid.Row="2" Grid.Column="0" Margin = "5" IsReadOnly="True" />
+                <Button Content="Zaloguj" Height="20" Width="100" VerticalAlignment="Bottom" 
+                HorizontalAlignment="Right" Margin="5" Grid.Row="2" Grid.Column="1" Click="Button_Click"/>
+                <Button Content="Rejestracja" Margin="5" Grid.Column="1" Grid.Row="3" 
+                        Width="100" Click="Rejestracja_Click" HorizontalAlignment="Right" 
+                        VerticalAlignment="Bottom" />
             </Grid>
         </StackPanel>
     </Grid>
