@@ -41,7 +41,7 @@ namespace Warehouse_Rys.ViewModel
         {
             try
             {
-                using (var conn = new SQLiteConnection(@"Data Source=Base.db;Version=3"))
+                using (var conn = new SQLiteConnection(@"Data Source=Base.3db;Version=3"))
                 {
                     conn.Open();
                     using (var cmd = new SQLiteCommand("SELECT NickName,Password FROM Users WHERE NickName='@username' AND Password = '@password'", conn))
